@@ -1,0 +1,31 @@
+DELETE http://localhost:8080/military-company/delete/738a4c02-8796-11ee-b9d1-0242ac120002
+###
+PUT http://localhost:8080/soldier/create/738a5756-8796-11ee-b9d1-0242ac120562
+Content-Type: application/json
+Authorization: Basic a2V2aW46dXNlcnVzZXI=
+
+{
+  "codename" : "UlaDev",
+  "specialty": "Java_Developer",
+  "skillRank": 10,
+  "militaryCompany": "738a4c02-8796-11ee-b9d1-0242ac123456"
+}
+###
+
+GET http://localhost:8082/soldier/soldiers
+###
+GET  http://localhost:8082/soldier/one-soldier/738a4f7c-8796-11ee-b9d1-0242ac120002
+###
+GET http://localhost:8082/soldier/soldiersCompany/738a5756-8796-11ee-b9d1-0242ac120002
+###
+PUT http://localhost:8082/soldier/update/738a4f7c-8796-11ee-b9d1-0242ac120002
+Content-Type: application/json
+Authorization: Basic a2V2aW46dXNlcnVzZXI=
+
+{
+  "codename" : "UlaDev",
+  "specialty": "Java_Developer",
+  "skillRank": 10,
+  "militaryCompany": "738a4c02-8796-11ee-b9d1-0242ac120002"
+}
+###

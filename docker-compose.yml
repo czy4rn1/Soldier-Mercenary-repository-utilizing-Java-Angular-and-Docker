@@ -1,0 +1,80 @@
+version: '3'
+
+services:
+  soldiers:
+    build:
+      context: ./Soldiers
+      dockerfile: Dockerfile
+    image: soldiers:1.0.0-SNAPSHOT
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://soldiers-db:5432/soldiers_db"
+      SPRING_DATASOURCE_DRIVERCLASSNAME: "org.postgresql.Driver"
+      SPRING_DATASOURCE_USERNAME: "soldiers_user"
+      SPRING_DATASOURCE_PASSWORD: "soldiers_password"
+      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.PostgreSQLDialect"
+
+    restart: always
+
+  companies:
+    build:
+      context: ./Companies
+      dockerfile: Dockerfile
+    image: companies:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      COMPANIES_SOLDIERS_URL: "http://soldiers:8080"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://companies-db:5432/companies_db"
+      SPRING_DATASOURCE_DRIVERCLASSNAME: "org.postgresql.Driver"
+      SPRING_DATASOURCE_USERNAME: "companies_user"
+      SPRING_DATASOURCE_PASSWORD: "companies_password"
+      SPRING_JPA_DATABASE_PLATFORM: "org.hibernate.dialect.PostgreSQLDialect"
+
+
+  gateway:
+    build:
+      context: ./Gateway
+      dockerfile: Dockerfile
+    image: gateway:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      MILITARY_SOLDIERS_URL: "http://soldiers:8080"
+      MILITARY_COMPANIES_URL: "http://companies:8080"
+      MILITARY_GATEWAY_HOST: "gateway:8080"
+
+  angular:
+    build:
+      context: ./angular
+      dockerfile: Dockerfile
+    image: angular:1.0.0-SNAPSHOT
+    restart: always
+    environment:
+      SOLDIER_URL: http://gateway:8080/soldier
+      COMPANY_URL: http://gateway:8080/military-company
+    ports:
+      - "8087:80"
+
+  soldiers-db:
+    image: postgres:16.1
+    restart: always
+    environment:
+      POSTGRES_DB: "soldiers_db"
+      POSTGRES_USER: "soldiers_user"
+      POSTGRES_PASSWORD: "soldiers_password"
+    volumes:
+      - soldiers-db-data:/var/lib/postgresql/data
+  
+  companies-db:
+    image: postgres:16.1
+    restart: always
+    environment:
+      POSTGRES_DB: "companies_db"
+      POSTGRES_USER: "companies_user"
+      POSTGRES_PASSWORD: "companies_password"
+    volumes:
+      - companies-db-data:/var/lib/postgresql/data
+
+volumes:
+  soldiers-db-data:
+  companies-db-data:
+    
+
