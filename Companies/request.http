@@ -1,0 +1,16 @@
+DELETE http://localhost:8081/military-company/delete/738a4c02-8796-11ee-b9d1-0242ac120002
+###
+PUT http://localhost:8081/military-company/create/738a4c02-8796-11ee-b9d1-0242ac123456
+Content-Type: application/json
+Authorization: Basic a2V2aW46dXNlcnVzZXI=
+
+{
+  "name": "Politechnika_Gdanska",
+  "foundingYear": 1945
+}
+###
+
+GET http://localhost:8081/military-company/companies
+###
+GET http://localhost:8081/military-company/one-company/738a4c02-8796-11ee-b9d1-0242ac120002
+###
