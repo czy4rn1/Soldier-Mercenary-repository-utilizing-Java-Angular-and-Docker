@@ -1,0 +1,55 @@
+<article *ngIf="soldier">
+  <header><h2>Edit soldier</h2></header>
+
+  <form class="container"  #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-4 p-2">
+        <div>
+          <label for="codename">Codename:</label>
+          <input id="codename" name="codename" [(ngModel)]="soldier.codename"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 p-2">
+        <div>
+          <label for="specialty">Specialty:</label>
+          <input id="specialty" name="specialty" [(ngModel)]="soldier.specialty"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 p-2">
+        <div>
+          <label for="skillRank">Skill rank:</label>
+          <input id="skillRank" name="skillRank" [(ngModel)]="soldier.skillRank"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 p-2">
+        <fieldset *ngIf="militaryCompanies">
+          <legend>Military Company:</legend>
+          <div *ngFor="let militaryCompany of militaryCompanies.companies">
+            <label>
+              <input type="radio" name="militaryCompany" [(ngModel)]="soldier.militaryCompany" [value]="militaryCompany.id"/>
+              {{militaryCompany.name}}
+            </label>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2 p-2">
+        <button type="submit">Update</button>
+      </div>
+      <div class="col-2 p-2">
+        <button type="button" (click)="form.resetForm(original)">Reset</button>
+      </div>
+    </div>
+  </form>
+</article>

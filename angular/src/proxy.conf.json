@@ -1,0 +1,12 @@
+{
+  "/soldier": {
+    "target": "http://localhost:8082",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/military-company": {
+  "target": "http://localhost:8082",
+  "secure": false,
+  "changeOrigin": true
+  }
+}

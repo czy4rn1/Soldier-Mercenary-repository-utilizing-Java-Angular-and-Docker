@@ -1,0 +1,23 @@
+<article *ngIf="militaryCompany">
+  <header><h2>Military Company<br><br>Name: {{militaryCompany.name}}<br><br>Founding Year: {{militaryCompany.foundingYear}}<br><br>
+  UUID: {{militaryCompany.id}}</h2></header>
+</article>
+<article *ngIf="soldiers">
+  <header><h2>Soldiers in the company</h2></header>
+  <tbody>
+  <tr *ngFor="let soldier of soldiers.soldiers">
+    <td>{{soldier.codename}}</td>
+    <td>
+      <a [routerLink]="['/companies', militaryCompany.id, 'soldiers', soldier.id]">View</a>
+    </td>
+    <td>
+      <a [routerLink]="['/companies', militaryCompany.id, 'soldiers', soldier.id, 'edit']">Edit</a>
+    </td>
+    <td>
+      <button (click)="onDelete(soldier)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+  <h2><a [routerLink]="['/companies', militaryCompany.id, 'soldiers', 'add']">Create new soldier</a></h2>
+</article>
+

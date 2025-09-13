@@ -1,0 +1,51 @@
+<article>
+  <header><h2>Create soldier</h2></header>
+
+  <form class="container"  #form="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-4 p-2">
+        <div>
+          <label for="uuid">UUID:</label>
+          <input id="uuid" name="uuid" [(ngModel)]="uuid"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 p-2">
+        <div>
+          <label for="codename">Codename:</label>
+          <input id="codename" name="codename" [(ngModel)]="soldier.codename"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 p-2">
+        <div>
+          <label for="specialty">Specialty:</label>
+          <input id="specialty" name="specialty" [(ngModel)]="soldier.specialty"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 p-2">
+        <div>
+          <label for="skillRank">Skill rank:</label>
+          <input id="skillRank" name="skillRank" [(ngModel)]="soldier.skillRank"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2 p-2">
+        <button type="submit">Create</button>
+      </div>
+      <div class="col-2 p-2">
+        <button type="button" (click)="form.resetForm(original)">Reset</button>
+      </div>
+    </div>
+  </form>
+</article>
